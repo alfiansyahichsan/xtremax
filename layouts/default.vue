@@ -4,7 +4,7 @@
       <div class="flex h-full">
         <Sidebar />
         <main
-          class="flex flex-col w-full bg-white overflow-x-hidden overflow-y-auto mb-14"
+          class="flex flex-col w-full bg-white overflow-x-hidden overflow-y-auto"
         >
           <Nuxt />
         </main>

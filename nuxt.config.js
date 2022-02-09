@@ -1,5 +1,8 @@
 export default {
   ssr: true,
+  server: {
+    port: 8001,
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'xtremax.alfiansyah-ichsan.dev',
@@ -45,6 +48,12 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    devMiddleware: {
+      headers: {
+        'Cache-Control': 'no-store',
+        Vary: '*',
+      },
+    },
     postcss: {
       plugins: {
         'tailwindcss/nesting': {},

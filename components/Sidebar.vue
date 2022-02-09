@@ -3,6 +3,8 @@
     <div class="wrapper">
       <div class="content">Sidebar</div>
     </div>
+
+    <div>TEST</div>
   </nav>
 </template>
 
@@ -14,7 +16,7 @@ export default {
 
 <style lang="postcss" scoped>
 nav {
-  @apply flex w-72 h-full bg-pink-500;
+  @apply flex w-56 h-full;
   .wrapper {
     @apply w-full flex mx-auto px-6 py-8;
     .content {
