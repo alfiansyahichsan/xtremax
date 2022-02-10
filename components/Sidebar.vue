@@ -9,7 +9,9 @@
           >
             <img
               class="w-12"
-              src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/64/ffffff/external-world-global-logistics-flatart-icons-outline-flatarticons.png"
+              :src="`https://img.icons8.com/external-flatart-icons-outline-flatarticons/64/${
+                showPlaceList ? 'ffffff' : '8197a0'
+              }/external-world-global-logistics-flatart-icons-outline-flatarticons.png`"
             />
             <span>Browse</span>
           </li>

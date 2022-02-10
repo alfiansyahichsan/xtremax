@@ -1,8 +1,5 @@
 <template>
-  <div
-    v-if="Object.keys(placeDetail).length"
-    class="right-0 bg-gray-600 absolute top-0 h-full pt-20 max-w-sm shadow-xl"
-  >
+  <section v-if="Object.keys(placeDetail).length">
     <!-- NO PHOTO VARIABLE FROM GMAPS API RESPOSE -->
     <img
       v-if="placeDetail.photos"
@@ -99,7 +96,7 @@
         }}</a>
       </span>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -115,3 +112,9 @@ export default {
   },
 }
 </script>
+
+<style lang="postcss" scoped>
+section {
+  @apply right-0 bg-gray-600 absolute top-0 h-full pt-20 max-w-sm shadow-xl;
+}
+</style>

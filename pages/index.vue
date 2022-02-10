@@ -26,7 +26,9 @@
             :map="map"
           />
 
-          <PlaceDescription />
+          <transition name="slide-fade">
+            <PlaceDescription />
+          </transition>
         </div>
       </template>
     </GoogleMapLoader>
@@ -75,6 +77,10 @@ export default {
     },
   },
 
+  async mounted() {
+    await this.$store.dispatch('getLocations')
+  },
+
   methods: {
     clear() {
       this.$store.dispatch('setMapDefault', true)
@@ -89,9 +95,9 @@ export default {
   .content {
     @apply flex flex-row h-full w-full;
     .header {
-      @apply bg-[#F4F7FA] right-0 w-full h-20 z-10 p-5 flex flex-row items-center justify-between;
+      @apply bg-[#F4F7FA] right-0 w-full h-28 z-10 py-5 px-10 flex flex-row items-center justify-between;
       h2 {
-        @apply font-bold text-lg;
+        @apply font-extrabold text-xl;
       }
     }
   }

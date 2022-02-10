@@ -14,39 +14,6 @@ export default {
   data() {
     return {
       markerContent: null,
-      markerDefault: {
-        icon: {
-          url: '/pin-point.png',
-          // eslint-disable-next-line no-undef
-          scaledSize: new google.maps.Size(60, 60), // scaled size
-          // eslint-disable-next-line no-undef
-          labelOrigin: new google.maps.Point(16, 9),
-        },
-        label: {
-          text: this.marker.id,
-          color: 'white',
-          fontSize: '12px',
-          className:
-            'bg-black px-3 py-2 absolute left-0 rounded-l-full text-left',
-        },
-      },
-
-      markerOnHover: {
-        icon: {
-          url: '/pin-point.png',
-          // eslint-disable-next-line no-undef
-          scaledSize: new google.maps.Size(90, 90), // scaled size
-          // eslint-disable-next-line no-undef
-          labelOrigin: new google.maps.Point(16, 15),
-        },
-        label: {
-          text: `${this.marker.id}` + `${this.marker.headline}`,
-          color: 'white',
-          fontSize: '12px',
-          className:
-            'bg-[#92D72D] px-3 py-2 absolute left-0 rounded-l-full text-left',
-        },
-      },
     }
   },
 
@@ -56,11 +23,16 @@ export default {
     },
   },
 
-  // watch: {
-  //   currentMarkerFocus(val) {
-  //     console.log(val)
-  //   },
-  // },
+  watch: {
+    currentMarkerFocus(val) {
+      // SET MARKER ON GREEN
+      if (val.id === this.marker.id) {
+        this.markerContent.setOptions(this.markerOptions(true))
+      } else {
+        this.markerContent.setOptions(this.markerOptions(false))
+      }
+    },
+  },
 
   mounted() {
     // eslint-disable-next-line no-undef
@@ -68,25 +40,46 @@ export default {
       position: this.marker.position,
       marker: this.marker,
       map: this.map,
-      ...this.markerDefault,
+      ...this.markerOptions(false),
     })
 
     this.markerContent.addListener('mouseover', () => {
-      this.markerContent.setOptions(this.markerOnHover)
+      this.markerContent.setOptions(this.markerOptions(true))
     })
 
     this.markerContent.addListener('mouseout', () => {
-      this.markerContent.setOptions(this.markerDefault)
+      this.markerContent.setOptions(this.markerOptions(false))
     })
 
     this.markerContent.addListener('click', async (e) => {
-      this.markerContent.setOptions(this.markerOnHover)
       await this.onClickMarker(e.latLng.lat(), e.latLng.lng())
     })
   },
 
   methods: {
-    markerOptions() {},
+    markerOptions(scale) {
+      const scaledSize = scale ? 90 : 60
+      const pointTop = scale ? 15 : 9
+      const bgLabel = scale ? 'bg-[#92D72D]' : 'bg-black'
+
+      return {
+        icon: {
+          url: '/pin-point.png',
+          // eslint-disable-next-line no-undef
+          scaledSize: new google.maps.Size(scaledSize, scaledSize),
+          // eslint-disable-next-line no-undef
+          labelOrigin: new google.maps.Point(16, pointTop),
+        },
+        label: {
+          text: scale
+            ? `${this.marker.id}` + `${this.marker.headline}`
+            : `${this.marker.id}`,
+          color: 'white',
+          fontSize: '12px',
+          className: `${bgLabel} px-3 py-2 absolute left-0 rounded-l-full text-left`,
+        },
+      }
+    },
 
     async onClickMarker(lat, lng) {
       await this.$store.dispatch('setMarkerItsContent', {
