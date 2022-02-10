@@ -26,16 +26,13 @@ export default {
   watch: {
     currentMarkerFocus(val) {
       // SET MARKER ON GREEN
-      if (val.id === this.marker.id) {
-        this.markerContent.setOptions(this.markerOptions(true))
-      } else {
-        this.markerContent.setOptions(this.markerOptions(false))
-      }
+      this.markerContent.setOptions(
+        this.markerOptions(val.id === this.marker.id)
+      )
     },
   },
 
   mounted() {
-    // eslint-disable-next-line no-undef
     this.markerContent = new google.maps.Marker({
       position: this.marker.position,
       marker: this.marker,
@@ -48,7 +45,12 @@ export default {
     })
 
     this.markerContent.addListener('mouseout', () => {
-      this.markerContent.setOptions(this.markerOptions(false))
+      // CHECK CURRENT MARKER FOCUS ID WITH THIS MARKER ID
+      // IF EQUAL, SET TO TRUE
+      // SET MARKER INTO THE GREEN ONE
+      this.markerContent.setOptions(
+        this.markerOptions(this.currentMarkerFocus.id === this.marker.id)
+      )
     })
 
     this.markerContent.addListener('click', async (e) => {
@@ -65,9 +67,7 @@ export default {
       return {
         icon: {
           url: '/pin-point.png',
-          // eslint-disable-next-line no-undef
           scaledSize: new google.maps.Size(scaledSize, scaledSize),
-          // eslint-disable-next-line no-undef
           labelOrigin: new google.maps.Point(16, pointTop),
         },
         label: {

@@ -10,11 +10,21 @@
 
           <div class="header">
             <h2>TOP-RATED TOURIST ATTRACTIONS IN SINGAPORE</h2>
-            <span
-              class="cursor-pointer text-white bg-gray-500 rounded-full px-3 py-1"
-              @click="clear"
-              >X</span
-            >
+            <div class="ml-auto flex flex-row space-x-4 items-center">
+              <img
+                class="w-8 h-8 cursor-pointer"
+                src="https://img.icons8.com/ios-filled/50/647D7F/settings.png"
+              />
+              <img
+                class="w-8 h-8 cursor-pointer"
+                src="https://img.icons8.com/ios-filled/50/647D7F/help.png"
+              />
+              <img
+                class="w-8 h-8 cursor-pointer"
+                src="https://img.icons8.com/ios-filled/50/647D7F/xbox-x.png"
+                @click="clear"
+              />
+            </div>
           </div>
 
           <!-- ADD MARKER -->

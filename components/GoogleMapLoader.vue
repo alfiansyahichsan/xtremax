@@ -49,7 +49,6 @@ export default {
   methods: {
     // INITIALIZE GOOGLE MAPS APIS
     initMap() {
-      // eslint-disable-next-line no-undef
       this.map = new google.maps.Map(this.$refs.googleMap, this.mapConfig)
     },
   },

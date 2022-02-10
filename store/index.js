@@ -98,7 +98,6 @@ export const actions = {
           },
           (place, status) => {
             if (
-              // eslint-disable-next-line no-undef
               status === google.maps.places.PlacesServiceStatus.OK &&
               place &&
               place.geometry &&
