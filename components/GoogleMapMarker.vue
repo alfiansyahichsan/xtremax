@@ -72,7 +72,7 @@ export default {
         },
         label: {
           text: scale
-            ? `${this.marker.id}` + `${this.marker.headline}`
+            ? `${this.marker.id}` + `\n` + `${this.marker.headline}`
             : `${this.marker.id}`,
           color: 'white',
           fontSize: '12px',

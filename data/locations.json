@@ -48,15 +48,15 @@
       "child": [
         {
           "id": "ArtScience Museum",
-          "position": { "lat": 1.283099, "lng": 103.860295 }
+          "position": { "lat": 1.2865473154221918, "lng": 103.85923411072078 }
         },
         {
           "id": "Marina Bay Sands Skypark",
-          "position": { "lat": 1.283099, "lng": 103.860295 }
+          "position": { "lat": 1.2858003569830447, "lng": 103.86109828412962 }
         },
         {
           "id": "Double Helix Bridge",
-          "position": { "lat": 1.283099, "lng": 103.860295 }
+          "position": { "lat": 1.2880051828389778, "lng": 103.86058666878702 }
         }
       ],
       "headline": "Headline Marina Bay Sands",
@@ -76,11 +76,11 @@
     },
     {
       "id": "Chinatown",
-      "position": { "lat": 1.284193, "lng": 103.843362 },
+      "position": { "lat": 1.2848203309633648, "lng": 103.84356999762264 },
       "child": [
         {
-          "id": "Test",
-          "position": { "lat": 1.28179, "lng": 103.863954 }
+          "id": "Chinatown",
+          "position": { "lat": 1.2848203309633648, "lng": 103.84356999762264 }
         }
       ],
       "headline": "Headline Chinatown",
