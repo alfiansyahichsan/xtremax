@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="h-full">
     <div ref="googleMap" class="google-map"></div>
     <template v-if="Boolean(map)">
       <slot :map="map" />
@@ -35,6 +35,13 @@ export default {
     }
   },
 
+  watch: {
+    mapConfig(val) {
+      this.map.setCenter({ lat: val.center.lat, lng: val.center.lng })
+      this.map.setZoom(val.zoom)
+    },
+  },
+
   async mounted() {
     await this.initMap()
   },
@@ -51,6 +58,6 @@ export default {
 
 <style lang="postcss" scoped>
 .google-map {
-  @apply w-full h-screen;
+  @apply w-full h-full absolute top-0 left-0;
 }
 </style>

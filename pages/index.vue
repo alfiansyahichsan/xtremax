@@ -1,81 +1,94 @@
 <template>
-  <GoogleMapLoader :map-config="mapConfig">
-    <template slot-scope="{ map }">
-      <GoogleMapMarker
-        v-for="marker in markers"
-        :key="marker.id"
-        :marker="marker"
-        :map="map"
-      />
-    </template>
-  </GoogleMapLoader>
+  <div class="wrapper">
+    <GoogleMapLoader :map-config="mapConfig">
+      <!-- MAP SLOT -->
+      <template slot-scope="{ map }">
+        <div class="content">
+          <PlaceLists :map="map" />
+
+          <div class="header">
+            <h2>TOP-RATED TOURIST ATTRACTIONS IN SINGAPORE</h2>
+            <span
+              class="cursor-pointer text-white bg-gray-500 rounded-full px-3 py-1"
+              @click="clear"
+              >X</span
+            >
+          </div>
+
+          <!-- ADD MARKER -->
+          <GoogleMapMarker
+            v-for="marker in markers"
+            ref="googleMarker"
+            :key="marker.id"
+            :marker="marker"
+            :map="map"
+          />
+
+          <PlaceDescription />
+        </div>
+      </template>
+    </GoogleMapLoader>
+  </div>
 </template>
 
 <script>
 import { mapSettings } from '../constants/mapSettings'
 import GoogleMapLoader from '../components/GoogleMapLoader.vue'
 import GoogleMapMarker from '../components/GoogleMapMarker.vue'
+import PlaceLists from '../components/PlaceLists.vue'
+import PlaceDescription from '../components/PlaceDescription.vue'
+
 export default {
   name: 'IndexPage',
   components: {
     GoogleMapLoader,
     GoogleMapMarker,
-  },
-
-  data() {
-    return {
-      markers: [
-        {
-          id: 'Merlion',
-          position: { lat: 1.28692, lng: 103.85457 },
-        },
-        {
-          id: 'Asian Civilisations Museum',
-          position: { lat: 1.287466, lng: 103.851424 },
-        },
-        {
-          id: 'Clarke Quay',
-          position: { lat: 1.290555, lng: 103.846188 },
-        },
-        {
-          id: 'Fort Canning Park',
-          position: { lat: 1.295526, lng: 103.845331 },
-        },
-        {
-          id: 'Orchard Road',
-          position: { lat: 1.302279, lng: 103.837399 },
-        },
-        {
-          id: 'Singapore Flyer',
-          position: { lat: 1.289332, lng: 103.863152 },
-        },
-        {
-          id: 'Marina Bay Sands',
-          position: { lat: 1.283099, lng: 103.860295 },
-        },
-        {
-          id: 'Gardens By The Bay',
-          position: { lat: 1.28179, lng: 103.863954 },
-        },
-        {
-          id: 'Chinatown',
-          position: { lat: 1.284193, lng: 103.843362 },
-        },
-      ],
-    }
+    PlaceLists,
+    PlaceDescription,
   },
 
   computed: {
+    // GET LIST OF POSITIONS
+    // HARDCODED FROM STATE
+    markers() {
+      return this.$store.state.markers
+    },
+
+    currentMarkerFocus() {
+      return this.$store.state.currentMarkerFocus
+    },
+
     mapConfig() {
       return {
         ...mapSettings,
-        center: this.mapCenter,
+        center: {
+          lat: this.currentMarkerFocus.position.lat,
+          lng: this.currentMarkerFocus.position.lng,
+        },
+        zoom: this.currentMarkerFocus.zoom,
       }
     },
+  },
 
-    mapCenter() {
-      return this.markers[0].position
+  methods: {
+    clear() {
+      this.$store.dispatch('setMapDefault', true)
     },
   },
 }
 </script>
+
+<style lang="postcss" scoped>
+.wrapper {
+  @apply relative w-full h-screen;
+  .content {
+    @apply flex flex-row h-full w-full;
+    .header {
+      @apply bg-[#F4F7FA] right-0 w-full h-20 z-10 p-5 flex flex-row items-center justify-between;
+      h2 {
+        @apply font-bold text-lg;
+      }
+    }
+  }
+}
+</style>
