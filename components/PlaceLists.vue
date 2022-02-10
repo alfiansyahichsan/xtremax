@@ -4,9 +4,7 @@
     <div class="mt-8 flex flex-col">
       <div v-for="(marker, index) in markers" :key="index">
         <button
-          :class="`w-full flex justify-between items-center font-semibold p-3 ${
-            currentMarkerFocus.id == marker.id ? 'bg-gray-900' : ''
-          }`"
+          :class="`${currentMarkerFocus.id == marker.id ? 'bg-gray-900' : ''}`"
           @click="
             !marker.child.length ? focusOnMarker(marker) : showNavChild(index)
           "
@@ -100,6 +98,10 @@ export default {
   }
   .list {
     @apply cursor-pointer border-t p-4 border-gray-700 flex flex-row justify-between items-center;
+  }
+
+  button {
+    @apply w-full flex justify-between items-center font-semibold hover:bg-gray-900 p-3;
   }
 }
 </style>

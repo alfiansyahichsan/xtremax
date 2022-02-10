@@ -89,6 +89,8 @@ export const state = () => ({
     },
   ],
 
+  showPlaceList: false,
+
   // DEFAULT CENTER MAPS
   currentMarkerFocus: {
     id: '',
@@ -115,6 +117,10 @@ export const mutations = {
     state.placeDetail = {}
   },
 
+  setPlaceList(state) {
+    state.showPlaceList = !state.showPlaceList
+  },
+
   setCurrentMarkerFocus(state, marker) {
     state.currentMarkerFocus = marker
   },
@@ -125,6 +131,10 @@ export const mutations = {
 }
 
 export const actions = {
+  showPlaceList(context) {
+    context.commit('setPlaceList')
+  },
+
   setMapDefault(context) {
     context.commit('setDefault')
   },

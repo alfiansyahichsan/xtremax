@@ -4,7 +4,9 @@
       <!-- MAP SLOT -->
       <template slot-scope="{ map }">
         <div class="content">
-          <PlaceLists :map="map" />
+          <transition name="slide-fade">
+            <PlaceLists v-if="showPlaceList" :map="map" />
+          </transition>
 
           <div class="header">
             <h2>TOP-RATED TOURIST ATTRACTIONS IN SINGAPORE</h2>
@@ -49,13 +51,16 @@ export default {
 
   computed: {
     // GET LIST OF POSITIONS
-    // HARDCODED FROM STATE
     markers() {
       return this.$store.state.markers
     },
 
     currentMarkerFocus() {
       return this.$store.state.currentMarkerFocus
+    },
+
+    showPlaceList() {
+      return this.$store.state.showPlaceList
     },
 
     mapConfig() {
